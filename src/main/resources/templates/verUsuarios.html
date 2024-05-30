@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <title>Usuarios Registradas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .container {
+            background-color: #ffffff25;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+            border: 0.1px solid rgba(128, 128, 128, 0.178);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+
+        .container::before {
+            position: absolute;
+            content: "";
+            width: 40%;
+            height: 40%;
+            right: 1%;
+            z-index: -1;
+            background: radial-gradient(circle, rgb(194, 13, 170) 20%, rgb(26, 186, 235) 60%, rgb(26, 186, 235) 100%);
+            filter: blur(70px);
+            border-radius: 50%;
+        }
+
+        .section__title {
+            color: #e2e8f0;
+        }
+
+        .table {
+            color: #e2e8f0;
+        }
+
+        .btn {
+            color: #fff;
+        }
+
+        .btn-outline-primary {
+            color: #5e7eb6;
+            border-color: #5e7eb6;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #5e7eb6;
+        }
+
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container p-4">
+    <center><h2 class="section__title">Usuarios Registradas</h2></center><br><br>
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Dirección</th>
+            <th>País</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="aso: ${listaUsuario}">
+            <td th:text="${aso.id}"></td>
+            <td th:text="${aso.nombre}"> </td>
+            <td th:text="${aso.edad}"> </td>
+            <td th:text="${aso.direccion}"> </td>
+            <td th:text="${aso.pais}"> </td>
+            <td th:text="${aso.correo}"> </td>
+            <td>
+                <a class="btn btn-info btn-xs" th:href="@{'/usuario/editar'+ '/' + ${aso.id}}" th:text="'editar'"></a>
+                &nbsp; &nbsp;
+                <a class="btn btn-danger btn-xs" th:href="@{'/usuario/eliminar'+ '/' + ${aso.id}}" th:text="'eliminar'"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <div class="p-3  "><br><a th:href="@{/usuario/formUsuario}" class="btn btn-outline-primary">Insertar</a></div>
+        <div class="p-3 "><br><a href="/" class="btn btn-outline-success">Inicio</a></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

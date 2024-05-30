@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ingresar</title>
+
+	<link rel="stylesheet" href="./css/estilos.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Source+Serif+Pro&display=swap"
+		  rel="stylesheet">
+	<style>
+		body {
+			background-color: #2d3748;
+			color: #e2e8f0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+		.container {
+			background-color: #2d3748;
+			border-radius: 0.5rem;
+			box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+			padding: 1.5rem;
+			max-width: 48rem;
+			width: 100%;
+		}
+		h2, h4 {
+			color: #e2e8f0;
+		}
+		.form-control {
+			background-color: #4a5568;
+			border: none;
+			color: #e2e8f0;
+		}
+		.form-control:focus {
+			background-color: #2d3748;
+			border: none;
+			box-shadow: 0 0 0 0.2rem rgba(66, 153, 225, 0.5);
+		}
+		.form-label {
+			color: #e2e8f0;
+		}
+		.btn-outline-dark {
+			background-image: linear-gradient(to right, #38a169, #4299e1);
+			color: #fff;
+			border: none;
+		}
+		.btn-outline-dark:hover {
+			background-image: linear-gradient(to right, #2f855a, #2b6cb0);
+		}
+		.btn-dark {
+			background-image: linear-gradient(to right, #38a169, #4299e1);
+			color: #fff;
+			border: none;
+		}
+		.btn-dark:hover {
+			background-image: linear-gradient(to right, #2f855a, #2b6cb0);
+		}
+		.form-select {
+			background-color: #4a5568;
+			border: none;
+			color: #e2e8f0;
+		}
+		.form-select:focus {
+			background-color: #2d3748;
+			border: none;
+			box-shadow: 0 0 0 0.2rem rgba(66, 153, 225, 0.5);
+		}
+	</style>
+</head>
+
+<body class="container d-flex flex-column justify-content-center align-items-center">
+
+<main class="d-flex justify-content-center flex-column align-items-center p-3 m-3">
+
+	<h2>Ingrese los datos.</h2>
+	<br>
+
+	<form th:action="@{/guardarPaquete}" th:object="${paquete}" method="post"
+		  class="d-flex flex-column p-5 g-3 needs-validation m-3">
+
+		<input type="hidden" th:field="*{id}" th:value="${paquete.id}" />
+
+		<h4>Solicitud de datos:</h4>
+		<div class="mb-3 form-floating">
+			<input type="text" class="form-control" name="nombre" placeholder="Nombre Jugador:" th:field="*{nombre}"
+				   th:errorclass="'form-control alert-danger'" />
+			<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+				   th:errors="*{nombre}"></small>
+			<label for="nombre" class="form-label p-3">Nombre: </label>
+		</div>
+
+		<div class="mb-3 form-floating">
+			<input type="number" class="form-control" name="nombre" th:field="*{numeroReferencia}"
+				   th:errorclass="'form-control alert-danger'" />
+			<label for="nombre" class="form-label p-3"># Referencia: </label>
+		</div>
+
+		<div class="mb-3 form-floating">
+			<input type="number" class="form-control" name="nombre" th:field="*{valor}"
+				   th:errorclass="'form-control alert-danger'" />
+			<label for="nombre" class="form-label p-3">Valor: </label>
+		</div>
+
+		<div class="mb-4 form-floating">
+			<select th:field="*{cliente}" class="form-select">
+				<th:block th:each="ls: ${listaCliente}">
+					<option th:text="${ls.nombre}" th:value="${ls.id}"></option>
+				</th:block>
+			</select>
+			<label class="col-sm-4 col-form-label">Cliente:</label>
+		</div>
+
+		<div class="d-flex mb-3">
+			<input type="submit" class="form-control btn-outline-dark me-4" value="Enviar">
+			<input type="reset" class="form-control btn btn-dark" value="Restablecer">
+		</div>
+
+	</form>
+</main>
+</body>
+
+</html>
